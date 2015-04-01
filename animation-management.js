@@ -7,11 +7,21 @@
   window.AnimationManagement = AnimationManagement = (function() {
     AnimationManagement.prototype.targetClass = '.am-item';
 
+    AnimationManagement.prototype.startingPoint = 90;
+
+    AnimationManagement.prototype.endingPoint = 10;
+
     AnimationManagement.prototype.items = [];
 
     function AnimationManagement(options) {
       if (options != null ? options.targetClass : void 0) {
         this.targetClass = options.targetClass;
+      }
+      if (options != null ? options.startingPoint : void 0) {
+        this.startingPoint = options.startingPoint;
+      }
+      if (options != null ? options.endingPoint : void 0) {
+        this.endingPoint = options.endingPoint;
       }
       this.initialize();
       return this;
@@ -22,7 +32,7 @@
         _this = this;
       results = document.querySelectorAll(this.targetClass);
       [].slice.call(results).forEach(function(el, i) {
-        return _this.items.push(new AMItem(el));
+        return _this.items.push(new AMItem(el, _this.startingPoint, _this.endingPoint));
       });
       return this;
     };
@@ -40,26 +50,67 @@
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   module.exports = AMItem = (function() {
-    function AMItem(el) {
+    function AMItem(el, startingPoint, endingPoint) {
       this.el = el;
+      this.startingPoint = startingPoint;
+      this.endingPoint = endingPoint;
       this.checkPosition = __bind(this.checkPosition, this);
-      this.initialize().bind();
+      this.initBounds().checkCallback().bind();
       return this;
     }
 
-    AMItem.prototype.initialize = function() {
+    AMItem.prototype.initBounds = function() {
+      if (this.el.getAttribute('data-startingPoint')) {
+        this.startingPoint = this.el.getAttribute('data-startingPoint');
+      }
+      if (this.el.getAttribute('data-endingPoint')) {
+        this.endingPoint = this.el.getAttribute('data-endingPoint');
+      }
       return this;
     };
 
     AMItem.prototype.checkPosition = function(e) {
-      var posTop;
+      var fn, posTop;
       posTop = this.offset().top;
-      if (posTop < document.body.scrollTop) {
-        this.el.classList.add('am-start');
+      if (posTop < this.getStartingPoint()) {
+        if (!this.el.classList.contains('am-start')) {
+          this.el.classList.add('am-start');
+          if (this.startingCallback) {
+            fn = eval('(' + this.startingCallback + ')');
+            if (typeof fn === 'function') {
+              fn(this.el);
+            }
+          }
+        }
       } else {
         this.el.classList.remove('am-start');
       }
+      if (posTop < this.getEndingPoint()) {
+        if (!this.el.classList.contains('am-end')) {
+          this.el.classList.add('am-end');
+        }
+      } else {
+        this.el.classList.remove('am-end');
+      }
       return this;
+    };
+
+    AMItem.prototype.checkCallback = function() {
+      if (this.el.getAttribute('data-startingCallback')) {
+        this.startingCallback = this.el.getAttribute('data-startingCallback');
+      }
+      if (this.el.getAttribute('data-endingCallback')) {
+        this.endingCallback = this.el.getAttribute('data-endingCallback');
+      }
+      return this;
+    };
+
+    AMItem.prototype.getStartingPoint = function() {
+      return document.body.scrollTop + (this.startingPoint * window.innerHeight / 100);
+    };
+
+    AMItem.prototype.getEndingPoint = function() {
+      return document.body.scrollTop - this.el.offsetHeight + (this.endingPoint * window.innerHeight / 100);
     };
 
     AMItem.prototype.offset = function() {

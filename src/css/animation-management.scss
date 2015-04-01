@@ -1,18 +1,21 @@
 body { margin: 0; padding: 0; }
 
-@keyframes margin{
-  from { margin: 0; }
-  to { margin: 0 30%; }
+@keyframes margiIn{
+  from { margin-left: -100%; }
+  to { margin-left: 30%; }
+}
+@keyframes marginOut{
+  from { margin-left: 30%; }
+  to { margin-left: 100%; }
 }
 
-@keyframes margin{
-  from { margin: 0; }
-  to { margin: 0 30%; }
-}
-
-.slice { height: 500px; opacity: .3; transition: opacity 1s linear;
-  &.am-start { opacity: 1; }
-  &.am-end { opacity: .3; }
+.slice { height: 500px; opacity: .3; transition: opacity .8s linear;
+  &.am-start { opacity: 1; 
+    img { animation: margiIn 300ms linear 1 both; }
+  }
+  &.am-end { opacity: .3; 
+    img { animation: marginOut 300ms linear 1 both; }
+  }
 }
 .white-slice {  background-color: #f5f5f5; }
 .blue-slice { background-color: #3466d2; }

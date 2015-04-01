@@ -15,12 +15,16 @@
 <body>
   <div class="am-item slice white-slice"></div>
   <div class="am-item slice blue-slice"></div>
-  <div class="am-item slice red-slice"></div>
+  <div class="am-item slice red-slice" data-startingPoint="70" data-endingPoint="50" data-startingCallback="addPixel"></div>
   <div class="am-item slice orange-slice"></div>
   <div class="am-item slice youtube-slice"></div>
 </body>
 
 <script type="text/javascript">
+  function addPixel(el){
+    el.innerHTML = '<img src="http://lorempixel.com/400/200/" alt=""/>'
+  }
+
   var am = new AnimationManagement({
   });
 </script>
