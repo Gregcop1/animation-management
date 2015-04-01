@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";AAAA,IAAK,GAAE,MAAM,EAAE,CAAC,EAAE,OAAO,EAAE,CAAC",
+"sources": ["../../src/css/animation-management.scss"],
+"names": [],
+"file": "animation-management.css"
+}
