@@ -1,6 +1,8 @@
 module.exports =
   dev:
     options:
+      server: 
+        baseDir: './dist/'
       watchTask: true
     bsFiles:
       src : [
