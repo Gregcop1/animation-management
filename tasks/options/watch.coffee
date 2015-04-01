@@ -1,15 +1,19 @@
 module.exports =
   sass:
-    files:'<%= in8.cssSrc %>/*.scss'
+    files:'<%= gc.cssSrc %>/*.scss'
     tasks: [
       'sass:build',
       'autoprefixer:build'
     ]
 
   coffeeify:
-    files:'<%= in8.js %>/*.coffee'
+    files: '<%= gc.jsSrc %>/*.coffee'
     tasks: 'coffeeify:js'
 
+  copy:
+    files: '<%= gc.jsDest %>/animation-management.js'
+    tasks: 'copy'
+
   uglify:
-    files:'<%= in8.jsDest %>/animation-management.js'
+    files:'<%= gc.finalDest %>/animation-management.js'
     tasks: 'uglify:build'

@@ -6,6 +6,6 @@ module.exports =
       watchTask: true
     bsFiles:
       src : [
-        '<%= in8.cssDest %>/*.css'
-        '<%= in8.jsDest %>/*.js'
+        '<%= gc.cssDest %>/*.css'
+        '<%= gc.jsDest %>/*.js'
       ]

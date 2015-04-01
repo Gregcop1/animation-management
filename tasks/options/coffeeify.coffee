@@ -1,4 +1,7 @@
 module.exports =
   js:
-    src:  ['<%= in8.jsSrc %>/animation-management.coffee']
-    dest: '<%= in8.jsDest %>/animation-management.js'
+    options: {}
+    files: [
+      src:  ['<%= gc.jsSrc %>/animation-management.coffee']
+      dest: '<%= gc.jsDest %>/animation-management.js'
+    ]

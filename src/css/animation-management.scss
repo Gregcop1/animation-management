@@ -1,1 +1,20 @@
 body { margin: 0; padding: 0; }
+
+@keyframes margin{
+  from { margin: 0; }
+  to { margin: 0 30%; }
+}
+
+@keyframes margin{
+  from { margin: 0; }
+  to { margin: 0 30%; }
+}
+
+.slice { height: 500px; opacity: .3; transition: opacity 1s linear;
+  &.am-start { opacity: 1; }
+  &.am-end { opacity: .3; }
+}
+.white-slice {  background-color: #f5f5f5; }
+.blue-slice { background-color: #3466d2; }
+.red-slice { background-color: #d2344f; }
+.orange-slice { background-color: #df7229; }

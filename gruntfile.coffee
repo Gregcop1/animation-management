@@ -30,9 +30,10 @@ module.exports = (grunt) ->
   config =
     pkg: grunt.file.readJSON('package.json')
     env: process.env
-    in8:
+    gc:
       jsSrc           : 'src/js'
-      jsDest          : '../'
+      jsDest          : 'dist/js/'
+      finalDest       : './'
       cssSrc          : 'src/css'
       cssDest         : 'dist/css'
       liveport        : grunt.option('liveport') || 35729
